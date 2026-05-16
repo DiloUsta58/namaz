@@ -1,0 +1,255 @@
+﻿{
+  "version": 1,
+  "generatedAt": "2026-05-14T22:03:51.1503263Z",
+  "baseDir": "Namaz",
+  "namazlar": [
+    {
+      "id": "sabah",
+      "ad": "Sabah Namazı",
+      "rekat": "4 Rekât",
+      "resimler": [],
+      "pdfler": [
+        "Namaz/vakitler/01_Sabah_Namazi.pdf"
+      ]
+    },
+    {
+      "id": "ogle",
+      "ad": "Öğle Namazı",
+      "rekat": "10 Rekât",
+      "resimler": [],
+      "pdfler": [
+        "Namaz/vakitler/02_Ogle_Namazi.pdf"
+      ]
+    },
+    {
+      "id": "ikindi",
+      "ad": "İkindi Namazı",
+      "rekat": "8 Rekât",
+      "resimler": [],
+      "pdfler": [
+        "Namaz/vakitler/03_Ikindi_Namazi.pdf"
+      ]
+    },
+    {
+      "id": "aksam",
+      "ad": "Akşam Namazı",
+      "rekat": "5 Rekât",
+      "resimler": [],
+      "pdfler": [
+        "Namaz/vakitler/04_Aksam_Namazi.pdf"
+      ]
+    },
+    {
+      "id": "yatsi",
+      "ad": "Yatsı Namazı",
+      "rekat": "13 Rekât",
+      "resimler": [],
+      "pdfler": [
+        "Namaz/vakitler/05_Yatsi_Namazi.pdf"
+      ]
+    },
+    {
+      "id": "cuma",
+      "ad": "Cuma Namazı",
+      "rekat": "16 Rekât",
+      "resimler": [],
+      "pdfler": [
+        "Namaz/vakitler/Cuma_Namazi.pdf"
+      ]
+    }
+  ],
+  "surelerVeDualar": [
+    {
+      "id": "amenerrasulu",
+      "ad": "Amenerrasulü",
+      "tur": "Dua",
+      "ses": "Namaz/sureler/AMENERRASULU.mp3",
+      "metin": "Amenerrasulü Türkçe Okunuşu:\n\nAmenerrasûlü bimâ unzile ileyhi min rabbihî vel mu'minûn(mu'minûne),\nkullun âmene billâhi ve melâiketihî ve kutubihî ve rusulih(rusulihî),\nlâ nüferrigu beyne ehadin min rusulih (rusulihî), \nve gâlû semi'nâ ve eta'nâ ğufrâneke Rabbenâ ve ileykel masîr (masîru).\nLâ yükellifullâhu nefsen illâ vüs'ahâ lehâ mâ kesebet ve aleyhâ mektesebet rabbenâ lâ tuâhıznâ in nesînâ ev ahta'nâ,\nrabbenâ ve lâ tahmil aleynâ ısran kemâ hameltehu alellezîne min gablinâ,\nrabbenâ ve lâ tuhammilnâ mâ lâ tâkate lenâ bih(bihî),\nva'fu annâ,\nvağfir lenâ,\nverhamnâ,\nente mevlânâ fensurnâ alel gavmil kâfirîn(kâfirîne).\n\nBakara Suresi 285-286. Ayet"
+    },
+    {
+      "id": "ayetelkursi",
+      "ad": "Ayetel Kürsî",
+      "tur": "Dua",
+      "ses": "Namaz/sureler/Ayetel_Kursi.mp3",
+      "metin": "Ayetel Kürsi Okunuşu:\n\nAllâhu lã ilâhe ill Hú, el-Hayyü'l-Kayyűm.\nLâ te'huzuhu sinetün ve lâ nevm.\nLehu mâ fissemâvâti ve mâ fil-ardd.\nMen zellezî yeşfeu indehû illâ bi-iznih .***\nYa'lemu mâ beyne eydîhim ve mâ halfehum.\nVe lâ yuhitüne bişey'in min ilmihî illâ bimâ şâe.\nVesiâ kürsiyyühus-semâvâti vel-ard.\nVe lâ yeúduhû hifzuhumâ.\nVe huvel-Aliyyul-Azîm.\nAllâhu lâ ilâhe illâ Hú, el-Hayyü'l-Kayyűm.\nLâ te'huzuhu sinetün ve lâ nevm.\nLehu mâ fissemâvâti ve mâ fil-ardd."
+    },
+    {
+      "id": "ezan",
+      "ad": "Ezan",
+      "tur": "Ezan",
+      "ses": "Namaz/kisa_sureler/00_Ezan.Mp3"
+    },
+    {
+      "id": "fatiha",
+      "ad": "Fatiha",
+      "tur": "Sure",
+      "ses": "Namaz/kisa_sureler/01_Fatiha.mp3",
+      "metin": "1. Fatiha Suresi\nElhamdü lillâhi rabbil'alemin.\nErrahmânirrahîm.\nMâliki yevmiddîn.\nİyyâke na'büdü ve iyyâke neste'în.\nİhdinessırâtel müstekîm.\nSırâtellezîne en'amte aleyhim ğayrilmağdûbi aleyhim veleddâllîn."
+    },
+    {
+      "id": "fil-suresi",
+      "ad": "Fil Suresi",
+      "tur": "Sure",
+      "ses": "Namaz/kisa_sureler/01_Fil_Suresi.mp3",
+      "metin": "2. Fil Suresi\nElem tera keyfe feale rabbüke biashâbil fîl.\nElem yec'al keydehüm fî tadlîl.\nVe ersele aleyhim tayran ebâbîl.\nTermîhim bihicâretin min siccîl.\nFecealehüm keasfin me'kûl."
+    },
+    {
+      "id": "kureys-suresi",
+      "ad": "Kureys Suresi",
+      "tur": "Sure",
+      "ses": "Namaz/kisa_sureler/02_Kureys_Suresi.mp3",
+      "metin": "3. Kureyş Suresi\nLi îlâfi kureyş.\nÎlâfihim rihleteşşitâi vessayf.\nFelya'büdû rabbe hâzel beyt.\nEllezî et'amehüm min cû'in ve âmenehüm min havf."
+    },
+    {
+      "id": "maun-suresi",
+      "ad": "Maun Suresi",
+      "tur": "Sure",
+      "ses": "Namaz/kisa_sureler/03_Maun_Suresi.mp3",
+      "metin": "4. Maun Suresi\nEraeytellezî yükezzibü biddîn.\nFezâlikellezî yedü'ulyetîm.\nVelâ yehüddü alâ taâmilmiskîn.\nFeveylün lilmüsallîn.\nEllezînehüm an salâtihim sâhûn.\nEllezînehüm yürâûn.\nVe yemneûnelyâûn."
+    },
+    {
+      "id": "kevser-suresi",
+      "ad": "Kevser Suresi",
+      "tur": "Sure",
+      "ses": "Namaz/kisa_sureler/04_Kevser_Suresi.mp3",
+      "metin": "5. Kevser Suresi\nİnnâ a'taynâkel kevser.\nFesalli lirabbike venhar.\nİnne şânieke hüvel ebter."
+    },
+    {
+      "id": "kafirun-suresi",
+      "ad": "Kafirun Suresi",
+      "tur": "Sure",
+      "ses": "Namaz/kisa_sureler/05_Kafirun_Suresi.mp3",
+      "metin": "6. Kafirun Suresi\nKul yâ eyyühel kâfirûn.\nLâ a'büdü mâ ta'büdûn.\nVelâ entüm âbidûne mâ a'büd.\nVelâ ene âbidün mâ abedtüm.\nVelâ entüm âbidûne mâ a'büd.\nLeküm dînüküm veliye dîn."
+    },
+    {
+      "id": "nasr-suresi",
+      "ad": "Nasr Suresi",
+      "tur": "Sure",
+      "ses": "Namaz/kisa_sureler/06_Nasr_Suresi.mp3",
+      "metin": "7. Nasr Suresi\nİzâ câe nasrullâhi velfeth.\nVe raeytennâse yedhulûne fî dînillâhi efvâcâ.\nFesebbih bihamdi rabbike vestağfirh, innehû kâne tevvâbâ."
+    },
+    {
+      "id": "tebbet-suresi",
+      "ad": "Tebbet Suresi",
+      "tur": "Sure",
+      "ses": "Namaz/kisa_sureler/07_Tebbet_Suresi.mp3",
+      "metin": "8. Tebbet Suresi\nTebbet yedâ ebî lehebin ve tebb.\nMâ eğnâ anhü mâlühû ve mâ keseb.\nSeyaslâ nâran zâte leheb.\nVemraetühû hammâletelhatab.\nFî cîdihâ hablün min mesed."
+    },
+    {
+      "id": "ihlas-suresi",
+      "ad": "Ihlas Suresi",
+      "tur": "Sure",
+      "ses": "Namaz/kisa_sureler/08_Ihlas_Suresi.mp3",
+      "metin": "9. İhlas Suresi\nKul hüvallahü ehad.\nAllâhüssamed.\nLem yelid ve lem yûled.\nVe lem yekün lehû küfüven ehad."
+    },
+    {
+      "id": "felak-suresi",
+      "ad": "Felak Suresi",
+      "tur": "Sure",
+      "ses": "Namaz/kisa_sureler/09_Felak_Suresi.mp3",
+      "metin": "10. Felak Suresi\nKul eûzü birabbil felak.\nMin şerri mâ halak.\nVe min şerri ğâsikın izâ vekab.\nVe min şerrinneffâsâti fîl ukad.\nVe min şerri hâsidin izâ hased."
+    },
+    {
+      "id": "nas-suresi",
+      "ad": "Nas Suresi",
+      "tur": "Sure",
+      "ses": "Namaz/kisa_sureler/10_Nas_Suresi.mp3",
+      "metin": "11. Nas Suresi\nKul eûzü birabbin nâs.\nMelikin nâs.\nİlâhin nâs.\nMin şerril vesvâsil hannâs.\nEllezî yüvesvisü fî sudûrin nâs.\nMinel cinneti vennâs."
+    },
+    {
+      "id": "ettehiyyatu",
+      "ad": "Ettehiyyatu",
+      "tur": "Dua",
+      "ses": "Namaz/kisa_sureler/11_Ettehiyyatu.mp3",
+      "metin": "Ettehiyyâtü lillâhi vessalavâtü vettayyibât.\nEsselâmü aleyke eyyühennebiyyu ve rahmetullahi ve berakâtüh.\nEsselâmü aleynâ ve alâ ibâdillâhissâlihîn.\nEşhedü en lâ ilâhe illallah ve eşhedü enne Muhammeden abdühû ve rasûlüh."
+    },
+    {
+      "id": "salli-barik-duasi",
+      "ad": "Salli Barik Duasi",
+      "tur": "Dua",
+      "ses": "Namaz/kisa_sureler/12_Salli_Barik_Duasi.mp3",
+      "metin": "\"\"Salli\"\" ve \"\"Bârik\"\" duaları, namazların son oturuşlarında Ettehiyyâtü duasından sonra okunan salavat dualarıdır.\n\nSalli Duası Okunuşu\n\"\"Allâhümme salli alâ Muhammedin ve alâ âli Muhammed. Kemâ salleyte alâ İbrâhîme ve alâ âli İbrâhîm. İnneke hamîdün mecîd.\"\"\n\nBarik Duası Okunuşu\n\"\"Allâhümme bârik alâ Muhammedin ve alâ âli Muhammed. Kemâ bârekte alâ İbrâhîme ve alâ âli İbrâhîm. İnneke hamîdün mecîd.\"\""
+    },
+    {
+      "id": "rabbena-duasi",
+      "ad": "Rabbena Duasi",
+      "tur": "Dua",
+      "ses": "Namaz/kisa_sureler/13_Rabbena_Duasi.mp3",
+      "metin": "\"\"Rabbena Atina\"\" ve \"\"Rabbenağfirli\"\" duaları, namazların son oturuşunda Salli ve Barik dualarından sonra, selam vermeden önce okunur.\n\nRabbena Atina Okunuşu\n\"\"Rabbenâ âtinâ fi'd-dünyâ haseneten ve fi'l-âhireti haseneten ve kınâ azâbe'n-nâr.\"\"\n\nRabbenağfirli Okunuşu\n\"\"Rabbenâğfirlî ve li-vâlideyye ve lil-mü'minîne yevme yekûmü'l-hısâb.\"\""
+    }
+  ],
+  "resimli": {
+    "pdfler": [],
+    "resimler": [
+      "Namaz/Resimli/00_0_Namaz_Rekatlari.jpg",
+      "Namaz/Resimli/01_1_Sabah_Sunnet.jpg",
+      "Namaz/Resimli/01_2_Sabah_Farz.jpg",
+      "Namaz/Resimli/02_1_Ogle_Namazi_Ilk_Sunnet.jpg",
+      "Namaz/Resimli/02_2_Ogle_Namazi_Farzi.jpg",
+      "Namaz/Resimli/02_3_Ogle_Namazi_Son_Sunneti.jpg",
+      "Namaz/Resimli/03_1_Ikindi_Namazi_Farzi.jpg",
+      "Namaz/Resimli/03_2_Ikindi_Namazi_Sunneti.jpg",
+      "Namaz/Resimli/04_1_Aksam_Namazi_Farzi.jpg",
+      "Namaz/Resimli/04_2_Aksam_Namazi_Sunneti.jpg",
+      "Namaz/Resimli/05_1_Yatsi_Namazi_Farzi.jpg",
+      "Namaz/Resimli/05_2_Yatsi_Namazi_Son_Sunneti.jpg"
+    ]
+  },
+  "medya": {
+    "youtube": [
+      {
+        "ad": "Beş Vakit Namaz Nasıl Kılınır",
+        "url": "https://www.youtube.com/watch?v=o_Pln7TKyTQ"
+      }
+    ],
+    "video": [],
+    "ses": [
+      {
+        "ad": "Namaz_gereken_dualar",
+        "dosya": "Namaz/kisa_sureler/Namaz_gereken_dualar.mp3"
+      },
+      {
+        "ad": "Namaz_Sureleri_Tamami",
+        "dosya": "Namaz/kisa_sureler/Namaz_Sureleri_Tamami.mp3"
+      }
+    ],
+    "dokumanlar": [
+      {
+        "ad": "01_Sabah_Namazi",
+        "dosya": "Namaz/vakitler/01_Sabah_Namazi.pdf"
+      },
+      {
+        "ad": "02_Ogle_Namazi",
+        "dosya": "Namaz/vakitler/02_Ogle_Namazi.pdf"
+      },
+      {
+        "ad": "03_Ikindi_Namazi",
+        "dosya": "Namaz/vakitler/03_Ikindi_Namazi.pdf"
+      },
+      {
+        "ad": "04_Aksam_Namazi",
+        "dosya": "Namaz/vakitler/04_Aksam_Namazi.pdf"
+      },
+      {
+        "ad": "05_Yatsi_Namazi",
+        "dosya": "Namaz/vakitler/05_Yatsi_Namazi.pdf"
+      },
+      {
+        "ad": "Cuma_Namazi",
+        "dosya": "Namaz/vakitler/Cuma_Namazi.pdf"
+      },
+      {
+        "ad": "GUNLUK_NAMAZ_REKATLARI",
+        "dosya": "Namaz/vakitler/GUNLUK_NAMAZ_REKATLARI.pdf"
+      },
+      {
+        "ad": "Iftitah_Tekbiri",
+        "dosya": "Namaz/vakitler/Iftitah_Tekbiri.pdf"
+      },
+      {
+        "ad": "Namazda_Okunan_Kisa_Sureler",
+        "dosya": "Namaz/vakitler/Namazda_Okunan_Kisa_Sureler.pdf"
+      }
+    ]
+  }
+}

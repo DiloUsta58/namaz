@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b1220" />
+    <title>Namaz Öğren</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" type="image/x-icon" href="icon/namaz_icon-v3.ico" />
+    <link rel="icon" type="image/png" href="icon/allah-192-v3.png" />
+    <link rel="apple-touch-icon" href="icon/allah-192-v3.png" />
+    <link rel="stylesheet" href="app.css" />
+  </head>
+  <body>
+    <div id="app" class="app">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand__mark" aria-hidden="true">ن</div>
+          <div class="brand__text">
+            <div class="brand__title">Namaz Öğren</div>
+            <div class="brand__subtitle">Adım adım, görsel + sesli</div>
+          </div>
+        </div>
+
+        <div class="search">
+          <input
+            id="searchInput"
+            class="search__input"
+            type="search"
+            placeholder="Ara: Sabah, Ayetel Kürsi, İhlâs..."
+            autocomplete="off"
+          />
+          <button id="clearSearch" class="btn btn--ghost" type="button">Temizle</button>
+        </div>
+      </header>
+
+      <div class="layout">
+        <nav class="nav" aria-label="Gezinti">
+          <a class="nav__item" href="#/basla" data-route="/basla">Başla</a>
+          <a class="nav__item" href="#/namazlar" data-route="/namazlar">Namazlar</a>
+          <a class="nav__item" href="#/sureler" data-route="/sureler">Sureler & Dualar</a>
+          <a class="nav__item" href="#/resimli" data-route="/resimli">Resimli</a>
+          <a class="nav__item" href="#/medya" data-route="/medya">Medya</a>
+          <a class="nav__item" href="#/arama" data-route="/arama">Arama</a>
+        </nav>
+
+        <main id="main" class="main" tabindex="-1"></main>
+      </div>
+
+      <footer class="footer">
+        <span>İçerik: <code>Namaz</code> klasörü</span>
+        <span class="dot" aria-hidden="true">•</span>
+        <a class="footer__link" href="Namaz/" target="_blank" rel="noreferrer">Dosyaları aç</a>
+      </footer>
+    </div>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
