@@ -228,6 +228,22 @@ function card(title, meta, actions = []) {
   );
 }
 
+function renderDetailText(detailText) {
+  const text = String(detailText || "");
+  const lines = text.split(/\r?\n/);
+  const isArabicLine = (s) => /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/u.test(s);
+
+  return el(
+    "div",
+    { class: "item__detail" },
+    lines.map((line) => {
+      const cls = isArabicLine(line) ? "detailLine arabic" : "detailLine";
+      // Keep empty lines as spacing
+      return el("div", { class: cls }, line === "" ? "\u00A0" : line);
+    }),
+  );
+}
+
 function repeatControls(audioEl) {
   const select = el(
     "select",
@@ -381,7 +397,7 @@ function audioRow(name, src, sub, detailText = "") {
   const a = el("audio", { class: "media", controls: "true", preload: "none", src: toUrl(src) });
   const rep = repeatControls(a);
   const mediaBox = el("div", { class: "item__media" }, el("div", { class: "mediaRow" }, a, rep));
-  const detail = detailText ? el("div", { class: "item__detail" }, detailText) : null;
+  const detail = detailText ? renderDetailText(detailText) : null;
 
   if (!detailText) {
     return el(
@@ -452,9 +468,7 @@ function renderBasla(index) {
     el(
       "p",
       { class: "p" },
-      "Bu uygulama ",
-      el("span", { class: "kbd" }, "_Namaz"),
-      " klasöründeki dosyaları kullanır. İnternetsiz de çalışır (aynı bilgisayarda / ağda).",
+      "Bu uygulama Namaz kılma ve duaları ezberleme ve Öğrenme için tasarlanmıştır.",
     ),
     hints,
     el("div", { class: "sep" }),
