@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "src": "Namaz/kisa_sureler/12_Salli_Barik_Duasi.mp3",
+  "starts": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    7.122004,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    51.184852
+  ],
+  "lineIdxs": [
+    0,
+    2,
+    4,
+    5,
+    7,
+    9,
+    11,
+    13,
+    14,
+    16,
+    18,
+    19,
+    21,
+    23,
+    25,
+    26
+  ],
+  "marks": {
+    "9": 6.752786,
+    "23": 50.795136
+  }
+}

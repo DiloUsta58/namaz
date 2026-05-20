@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "src": "Namaz/kisa_sureler/11_Ettehiyyatu.mp3",
+  "starts": [
+    null,
+    7.136453,
+    20.494428,
+    35.768098,
+    49.827709
+  ],
+  "lineIdxs": [
+    0,
+    2,
+    3,
+    4,
+    5,
+    7,
+    9
+  ]
+}

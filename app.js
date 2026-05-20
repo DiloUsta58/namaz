@@ -11,7 +11,7 @@ function h(text) {
 function el(tag, attrs = {}, ...children) {
   const node = document.createElement(tag);
   for (const [key, value] of Object.entries(attrs)) {
-    if (value === undefined || value === null) continue;
+    if (value === undefined || value === null || value === false) continue;
     if (key === "class") node.className = value;
     else if (key.startsWith("on") && typeof value === "function") {
       node.addEventListener(key.slice(2), value);
@@ -236,12 +236,327 @@ function renderDetailText(detailText) {
   return el(
     "div",
     { class: "item__detail" },
-    lines.map((line) => {
+    lines.map((line, i) => {
       const cls = isArabicLine(line) ? "detailLine arabic" : "detailLine";
       // Keep empty lines as spacing
-      return el("div", { class: cls }, line === "" ? "\u00A0" : line);
+      return el("div", { class: cls, "data-line": String(i) }, line === "" ? "\u00A0" : line);
     }),
   );
+}
+
+function syncKeyFor(src) {
+  return `sync:v1:${String(src || "")}`;
+}
+
+const syncFetchCache = new Map(); // src -> Promise<sync|null>
+const syncCache = new Map(); // src -> sync|null
+
+function syncFileNameForSrc(src) {
+  const s = String(src || "");
+  const base = s.split("/").pop() || "sync";
+  return base.replace(/\.(mp3|m4a|wav|ogg)$/i, "") + ".json";
+}
+
+async function fetchSyncFromFile(src) {
+  const file = syncFileNameForSrc(src);
+  try {
+    const res = await fetch(toUrl(`senkron/${file}`), { cache: "no-store" });
+    if (!res.ok) return null;
+    const obj = await res.json();
+    if (!obj) return null;
+    if (obj.marks && typeof obj.marks === "object") return obj;
+    if (!Array.isArray(obj.starts)) return null;
+    return obj;
+  } catch {
+    return null;
+  }
+}
+
+function loadSync(src) {
+  try {
+    const raw = localStorage.getItem(syncKeyFor(src));
+    if (!raw) return null;
+    const obj = JSON.parse(raw);
+    if (!obj) return null;
+    if (obj.marks && typeof obj.marks === "object") return obj;
+    if (!Array.isArray(obj.starts)) return null;
+    if (obj.lineIdxs && !Array.isArray(obj.lineIdxs)) return null;
+    return obj;
+  } catch {
+    return null;
+  }
+}
+
+function loadSyncCached(src) {
+  const fromLocal = loadSync(src);
+  if (fromLocal) {
+    syncCache.set(src, fromLocal);
+    return fromLocal;
+  }
+  if (syncCache.has(src)) return syncCache.get(src);
+  if (!syncFetchCache.has(src)) {
+    syncFetchCache.set(
+      src,
+      fetchSyncFromFile(src).then((obj) => {
+        syncCache.set(src, obj);
+        return obj;
+      }),
+    );
+  }
+  return null;
+}
+
+function saveSync(src, sync) {
+  localStorage.setItem(syncKeyFor(src), JSON.stringify(sync));
+}
+
+function downloadJson(filename, obj) {
+  const blob = new Blob([JSON.stringify(obj, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+}
+
+function applySyncHighlight(detailEl, audioEl, sync) {
+  if (!detailEl || !sync) return;
+  const t = audioEl.currentTime || 0;
+
+  const entries = [];
+  if (sync.marks && typeof sync.marks === "object") {
+    for (const [k, v] of Object.entries(sync.marks)) {
+      const line = Number(k);
+      const ts = Number(v);
+      if (!Number.isFinite(line) || !Number.isFinite(ts)) continue;
+      entries.push({ line, ts });
+    }
+  } else if (Array.isArray(sync.starts)) {
+    const lineIdxs = Array.isArray(sync.lineIdxs) ? sync.lineIdxs : null;
+    for (let i = 0; i < sync.starts.length; i += 1) {
+      const ts = sync.starts[i];
+      if (typeof ts !== "number" || !Number.isFinite(ts)) continue;
+      const line = lineIdxs ? lineIdxs[i] : i;
+      if (!Number.isFinite(line)) continue;
+      entries.push({ line, ts });
+    }
+  }
+  if (!entries.length) return;
+  entries.sort((a, b) => a.ts - b.ts);
+
+  let idx = 0;
+  for (let i = 0; i < entries.length; i += 1) {
+    if (entries[i].ts <= t + 0.001) idx = i;
+    else break;
+  }
+  const lines = detailEl.querySelectorAll(".detailLine");
+  for (let i = 0; i < lines.length; i += 1) {
+    lines[i].classList.remove("detailLine--active");
+  }
+  const active = lines[entries[idx].line];
+  if (active) active.classList.add("detailLine--active");
+  if (active) {
+    active.scrollIntoView({ block: "nearest" });
+  }
+}
+
+function openSyncModal({ title, audioEl, detailText, src }) {
+  const lines = String(detailText || "").split(/\r?\n/);
+  const isEmptyLine = (s) => String(s || "").trim() === "";
+  const existing = loadSync(src);
+  const sync = existing || { version: 2, src, marks: {} };
+  if (!sync.marks || typeof sync.marks !== "object") sync.marks = {};
+  let cursor = 0;
+
+  const overlay = el("div", { class: "modalOverlay", role: "dialog", "aria-modal": "true" });
+  const modal = el("div", { class: "modal" });
+
+  const close = () => overlay.remove();
+
+  const list = el(
+    "div",
+    { class: "modalList" },
+    lines.map((line, i) =>
+      el(
+        "button",
+        {
+          type: "button",
+          class: `modalLine${i === cursor ? " modalLine--active" : ""}`,
+          onclick: () => {
+            cursor = i;
+            const ts = sync.marks[String(i)];
+            if (typeof ts === "number" && Number.isFinite(ts)) {
+              try {
+                audioEl.currentTime = Math.max(0, ts);
+                audioEl.pause();
+              } catch {
+                // ignore
+              }
+            }
+            render();
+          },
+          disabled: isEmptyLine(line),
+          title: isEmptyLine(line) ? "Boş satır" : "",
+        },
+        line === "" ? " " : line,
+      ),
+    ),
+  );
+
+  const render = () => {
+    const btns = list.querySelectorAll(".modalLine");
+    for (let i = 0; i < btns.length; i += 1) {
+      btns[i].classList.toggle("modalLine--active", i === cursor);
+      const ts = sync.marks[String(i)];
+      btns[i].setAttribute("data-ts", ts == null ? "" : `${ts.toFixed(2)}s`);
+    }
+    const curTs = sync.marks[String(cursor)];
+    currentTs.textContent = typeof curTs === "number" && Number.isFinite(curTs) ? `${curTs.toFixed(2)}s` : "—";
+  };
+
+  const currentTs = el("span", { class: "syncCurTs" }, "—");
+
+  const setTime = () => {
+    const t = Math.max(0, Number(audioEl.currentTime || 0));
+    sync.marks[String(cursor)] = t;
+    saveSync(src, sync);
+
+    // Move cursor to next non-empty line
+    for (let i = cursor + 1; i < lines.length; i += 1) {
+      if (!isEmptyLine(lines[i])) {
+        cursor = i;
+        break;
+      }
+    }
+    render();
+  };
+
+  const nudge = (deltaSeconds) => {
+    const cur = sync.marks[String(cursor)];
+    if (typeof cur !== "number" || !Number.isFinite(cur)) {
+      showToast("Önce bu satırı işaretle");
+      return;
+    }
+    const next = Math.max(0, cur + deltaSeconds);
+    sync.marks[String(cursor)] = next;
+    saveSync(src, sync);
+    try {
+      audioEl.currentTime = next;
+      audioEl.pause();
+    } catch {
+      // ignore
+    }
+    render();
+  };
+
+  const playFromHere = async () => {
+    try {
+      await audioEl.play();
+    } catch {
+      showToast("Oynatma engellendi (Play'e bir kez daha bas)");
+    }
+  };
+
+  const pausePlayback = () => {
+    try {
+      audioEl.pause();
+    } catch {
+      // ignore
+    }
+  };
+
+  const clearLineMark = () => {
+    if (cursor < 0) return;
+    delete sync.marks[String(cursor)];
+    saveSync(src, sync);
+    render();
+  };
+
+  const clear = () => {
+    sync.marks = {};
+    saveSync(src, sync);
+    cursor = 0;
+    render();
+  };
+
+  const exportJson = () => {
+    downloadJson(syncFileNameForSrc(src), sync);
+  };
+
+  const importInput = el("input", {
+    type: "file",
+    accept: "application/json",
+    style: "display:none",
+    onchange: async (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      try {
+        const txt = await file.text();
+        const obj = JSON.parse(txt);
+        if (!obj) throw new Error("bad format");
+        if (obj.marks && typeof obj.marks === "object") {
+          sync.marks = obj.marks;
+        } else if (Array.isArray(obj.starts)) {
+          const lineIdxs = Array.isArray(obj.lineIdxs) ? obj.lineIdxs : null;
+          const marks = {};
+          for (let i = 0; i < obj.starts.length; i += 1) {
+            const ts = obj.starts[i];
+            if (typeof ts !== "number" || !Number.isFinite(ts)) continue;
+            const line = lineIdxs ? lineIdxs[i] : i;
+            if (!Number.isFinite(line)) continue;
+            marks[String(line)] = ts;
+          }
+          sync.marks = marks;
+        } else {
+          throw new Error("bad format");
+        }
+        sync.version = 2;
+        saveSync(src, sync);
+        cursor = 0;
+        render();
+      } catch {
+        showToast("Sync JSON okunamadı");
+      } finally {
+        importInput.value = "";
+      }
+    },
+  });
+
+  const footer = el(
+    "div",
+    { class: "modalFooter" },
+    el("button", { type: "button", class: "btn btn--primary", onclick: setTime }, "Şimdi işaretle"),
+    el(
+      "div",
+      { class: "syncTools" },
+      el("span", { class: "syncTools__label" }, "Seçili:"),
+      currentTs,
+      el("button", { type: "button", class: "btn btn--primary", onclick: playFromHere }, "Play"),
+      el("button", { type: "button", class: "btn", onclick: pausePlayback }, "Pause"),
+      el("button", { type: "button", class: "btn", onclick: () => nudge(-1) }, "-1s"),
+      el("button", { type: "button", class: "btn", onclick: () => nudge(-0.2) }, "-0.2s"),
+      el("button", { type: "button", class: "btn", onclick: () => nudge(0.2) }, "+0.2s"),
+      el("button", { type: "button", class: "btn", onclick: () => nudge(1) }, "+1s"),
+      el("button", { type: "button", class: "btn", onclick: clearLineMark }, "Satırı sil"),
+    ),
+    el("button", { type: "button", class: "btn", onclick: clear }, "Sıfırla"),
+    el("button", { type: "button", class: "btn", onclick: exportJson }, "Dışa aktar"),
+    el("button", { type: "button", class: "btn", onclick: () => importInput.click() }, "İçe aktar"),
+    el("button", { type: "button", class: "btn btn--ghost", onclick: close }, "Kapat"),
+    importInput,
+  );
+
+  modal.append(
+    el("div", { class: "modalHeader" }, el("div", { class: "modalTitle" }, `Senkron: ${title}`), el("div", { class: "modalSub" }, "Satırı seç → oynatırken doğru anda “Şimdi işaretle”.")),
+    list,
+    footer,
+  );
+  overlay.append(modal);
+  document.body.appendChild(overlay);
+  render();
 }
 
 function repeatControls(audioEl) {
@@ -399,20 +714,64 @@ function audioRow(name, src, sub, detailText = "") {
   const mediaBox = el("div", { class: "item__media" }, el("div", { class: "mediaRow" }, a, rep));
   const detail = detailText ? renderDetailText(detailText) : null;
 
+  const syncBtn = detailText
+    ? el("button", { type: "button", class: "btn btn--ghost", onclick: () => openSyncModal({ title: name, audioEl: a, detailText, src }) }, "Senkron")
+    : null;
+
   if (!detailText) {
     return el(
       "div",
       { class: "item" },
       el("div", { class: "item__left" }, el("div", { class: "item__title" }, name), el("div", { class: "item__sub" }, sub || src)),
-      el("div", { style: "min-width: min(420px, 54vw);" }, el("div", { class: "mediaRow" }, a, rep)),
+      el("div", { style: "min-width: min(420px, 54vw);" }, el("div", { class: "mediaRow" }, a, rep, syncBtn)),
     );
+  }
+
+  if (detailText && detail) {
+    const apply = () => {
+      const sync = loadSyncCached(src);
+      if (sync) applySyncHighlight(detail, a, sync);
+    };
+    a.addEventListener("timeupdate", apply);
+    a.addEventListener("play", apply);
+
+    // Click-to-seek on lines (works even when audio is paused).
+    detail.addEventListener("click", (e) => {
+      const target = e.target instanceof Element ? e.target.closest(".detailLine") : null;
+      if (!target) return;
+      const idx = Number(target.getAttribute("data-line"));
+      if (!Number.isFinite(idx)) return;
+      const sync = loadSyncCached(src);
+      if (!sync) return;
+      let ts = null;
+      if (sync.marks && typeof sync.marks === "object") {
+        ts = sync.marks[String(idx)];
+      } else if (Array.isArray(sync.starts)) {
+        const lineIdxs = Array.isArray(sync.lineIdxs) ? sync.lineIdxs : null;
+        let syncIdx = idx;
+        if (lineIdxs) {
+          syncIdx = lineIdxs.indexOf(idx);
+          if (syncIdx < 0) return;
+        }
+        ts = sync.starts[syncIdx];
+      }
+      if (typeof ts !== "number" || !Number.isFinite(ts)) return;
+      try {
+        a.currentTime = Math.max(0, ts);
+        a.pause();
+      } catch {
+        // ignore
+      }
+      // keep highlight in sync immediately
+      applySyncHighlight(detail, a, sync);
+    });
   }
 
   return el(
     "div",
     { class: "item item--stack" },
     el("div", { class: "item__left" }, el("div", { class: "item__title" }, name), el("div", { class: "item__sub" }, sub || src)),
-    mediaBox,
+    el("div", { class: "row", style: "justify-content: space-between; width:100%;" }, mediaBox, syncBtn),
     detail,
   );
 }
