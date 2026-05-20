@@ -312,6 +312,18 @@ code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Libera
 .adminOnly{display:none !important}
 .adminMode .adminOnly{display:inline-flex !important}
 
+.syncStatus{font-weight:800}
+.syncStatus--ok{
+  border-color: rgba(52,211,153,.45) !important;
+  background: rgba(52,211,153,.10) !important;
+  color: #c8ffe6 !important;
+}
+.syncStatus--missing{
+  border-color: rgba(251,113,133,.45) !important;
+  background: rgba(251,113,133,.10) !important;
+  color: #ffd0dc !important;
+}
+
 .row{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
 .jumpBar{
   position: sticky;
@@ -370,7 +382,7 @@ code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Libera
   background:rgba(52,211,153,.055);
 }
 .item--heard .item__title::after{
-  content:" gehört";
+  content:" dinlenildi";
   margin-left:8px;
   color:#c8ffe6;
   font-size:var(--fs-sm);

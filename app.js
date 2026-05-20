@@ -807,8 +807,8 @@ function audioRow(name, src, sub, detailText = "", domId = "") {
   const syncBtn = detailText
     ? el(
         "button",
-        { type: "button", class: "btn btn--ghost adminOnly", onclick: () => openSyncModal({ title: name, audioEl: a, detailText, src }) },
-        "Senkron",
+        { type: "button", class: "btn btn--ghost adminOnly syncStatus syncStatus--missing", onclick: () => openSyncModal({ title: name, audioEl: a, detailText, src }) },
+        "Senkron yok",
       )
     : null;
 
@@ -831,8 +831,23 @@ function audioRow(name, src, sub, detailText = "", domId = "") {
 
     // Auto-load sync from /senkron/*.json and apply once it arrives.
     ensureSyncLoaded(src).then((sync) => {
-      if (sync) applySyncHighlight(detail, a, sync);
+      if (sync) {
+        applySyncHighlight(detail, a, sync);
+        if (syncBtn) {
+          syncBtn.textContent = "Senkron mevcut";
+          syncBtn.classList.remove("syncStatus--missing");
+          syncBtn.classList.add("syncStatus--ok");
+        }
+      }
     });
+
+    // If sync is already available (localStorage/cache), reflect it immediately.
+    const already = loadSyncCached(src);
+    if (already && syncBtn) {
+      syncBtn.textContent = "Senkron mevcut";
+      syncBtn.classList.remove("syncStatus--missing");
+      syncBtn.classList.add("syncStatus--ok");
+    }
 
     // Click-to-seek on lines (works even when audio is paused).
     detail.addEventListener("click", (e) => {
@@ -1342,10 +1357,6 @@ function setupAutoNextAudio() {
       for (const other of audios) {
         if (other !== audio) other.pause();
       }
-    });
-    audio.addEventListener("ended", () => {
-      const next = audios[idx + 1];
-      if (next) next.play().catch(() => {});
     });
   });
 }

@@ -80,6 +80,13 @@
       "ses": "Namaz/kisa_sureler/00_Ezan.Mp3"
     },
 	{
+      "id": "inşirah-suresi",
+      "ad": "İnşirah Suresi",
+      "tur": "Sure",
+      "ses": "Namaz/sureler/insirah_suresi.mp3",
+      "metin": "İnşirah Suresi:\n\nبِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّح۪يمِ\n\nاَلَمْ نَشْرَحْ لَكَ صَدْرَكَۙ ﴿١﴾ وَوَضَعْنَا عَنْكَ وِزْرَكَۙ ﴿٢﴾ اَلَّذ۪ٓي اَنْقَضَ ظَهْرَكَۙ ﴿٣﴾ وَرَفَعْنَا لَكَ ذِكْرَكَۜ ﴿٤ فَاِنَّ مَعَ الْعُسْرِ يُسْرًاۙ ﴿٥﴾ اِنَّ مَعَ الْعُسْرِ يُسْرًاۜ ﴿٦﴾ فَاِذَا فَرَغْتَ فَانْصَبْۙ ﴿٧﴾ وَاِلٰى رَبِّكَ فَارْغَبْ ﴿٨﴾\n\nOkunuşu:\n\nBismillâhi’r-Rahmâni’r-Rahîm\n\nElem neşrah leke sadrâk\nVe vada’nâ ’anke vizrâk.\nElleziy enkada zahrâk.\nVe refa’nâ leke zikrâk.\nFeinne me’al’usri yusrâ.\nİnne me’al’usri yusrâ.\nFeizâ ferağte fensab.\nVe ila Rabbike ferğab.\n\nAnlamı:\n\nRahmân ve Rahîm olan Allah’ın adıyla.\nBiz senin göğsünü açıp genişletmedik mi?\nBelini büken yükünü senden alıp atmadık mı?\nSenin şânını ve ününü yüceltmedik mi?\nElbette zorluğun yanında bir kolaylık vardır. Gerçekten, zorlukla beraber bir kolaylık daha vardır.\nBoş kaldın mı hemen (başka) işe koyul ve yalnız Rabbine yönel."
+    },
+	{
       "id": "Sübhaneke",
       "ad": "*Sübhaneke Duası",
       "tur": "Dua",
@@ -105,14 +112,14 @@
       "ad": "Kureys Suresi",
       "tur": "Sure",
       "ses": "Namaz/kisa_sureler/02_Kureys_Suresi.mp3",
-	"metin": "3. Kureyş Suresi:\n\nبِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّح۪يمِ\n\n لِا۪يلَافِ قُرَيْشٍۙ ﴿١﴾ ا۪يلَافِهِمْ رِحْلَةَ الشِّتَٓاءِ وَالصَّيْفِۚ ﴿٢﴾ فَلْيَعْبُدُوا رَبَّ هٰذَا الْبَيْتِۙ ﴿٣﴾ اَلَّذ۪ٓي اَطْعَمَهُمْ مِنْ جُوعٍ وَاٰمَنَهُمْ مِنْ خَوْفٍ ﴿٤ \n\nOkunuşu: Bismillâhi’r-Rahmâni’r-Rahîm.\n Li îlâfi kurayş.\n\nÎlâfihim rihlete’ş-şitâi ve’s-sayf.\nFelya’budû Rabbe hâze’l-beyt.\nEllezî et’amehum min cû’in ve âmenehum min havf.\n\nAnlamı:\n\nRahmân ve Rahîm olan Allah’ın adıyla.\n\nKureyş’in emniyetini sağladığı,\nYaz ve kış yolculuğunda onları ısındırıp yakınlaştırdığı için onlar,\nBu evin (Kâbe’nin) Rabbine kulluk etsinler.\nKi O (Allah) kendilerini açlıktan (kurtarıp) doyuran ve her çeşit korkudan güvenliğe kavuşturandır."
+	"metin": "3. Kureyş Suresi:\n\nبِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّح۪يمِ\n\n لِا۪يلَافِ قُرَيْشٍۙ ﴿١﴾ ا۪يلَافِهِمْ رِحْلَةَ الشِّتَٓاءِ وَالصَّيْفِۚ ﴿٢﴾ فَلْيَعْبُدُوا رَبَّ هٰذَا الْبَيْتِۙ ﴿٣﴾ اَلَّذ۪ٓي اَطْعَمَهُمْ مِنْ جُوعٍ وَاٰمَنَهُمْ مِنْ خَوْفٍ ﴿٤ \n\nOkunuşu:\n\nBismillâhi’r-Rahmâni’r-Rahîm.\nLi îlâfi kurayş.\n\nÎlâfihim rihlete’ş-şitâi ve’s-sayf.\nFelya’budû Rabbe hâze’l-beyt.\nEllezî et’amehum min cû’in ve âmenehum min havf.\n\nAnlamı:\n\nRahmân ve Rahîm olan Allah’ın adıyla.\n\nKureyş’in emniyetini sağladığı,\nYaz ve kış yolculuğunda onları ısındırıp yakınlaştırdığı için onlar,\nBu evin (Kâbe’nin) Rabbine kulluk etsinler.\nKi O (Allah) kendilerini açlıktan (kurtarıp) doyuran ve her çeşit korkudan güvenliğe kavuşturandır."
     },
     {
       "id": "maun-suresi",
       "ad": "Maun Suresi",
       "tur": "Sure",
       "ses": "Namaz/kisa_sureler/03_Maun_Suresi.mp3",
-      "metin": "4. Maun Suresi:\n\n بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّح۪يمِ \n\n اَرَاَيْتَ الَّذ۪ي يُكَذِّبُ بِالدّ۪ينِۜ ﴿١﴾ فَذٰلِكَ الَّذ۪ي يَدُعُّ الْيَت۪يمَۙ ﴿٢﴾ وَلَا يَحُضُّ عَلٰى طَعَامِ الْمِسْك۪ينِۜ ﴿٣﴾ فَوَيْلٌ لِلْمُصَلّ۪ينَۙ ﴿٤﴾ اَلَّذ۪ينَ هُمْ عَنْ صَلَاتِهِمْ سَاهُونَۙ ﴿٥﴾ اَلَّذ۪ينَ هُمْ يُرَٓاؤُ۫نَۙ ﴿٦﴾ وَيَمْنَعُونَ الْمَاعُونَ ﴿٧ \n\nOkunuşu:\n\nBismillâhi’r-Rahmâni’r-Rahîm\nEraeytellezî yukezzibu bi’d-dîn.\nFezâlike’l-lezî yedu’ul-yetîm.\nVe lâ yehuddu alâ ta’âmi’l-miskîn.\nFeveylun lil-musallîn.\nEllezînehum an salâtihim sâhûn.\nEllezînehum yurâûn.\nVe yemne’ûne’l-mâ’ûn.\n\nAnlamı:\n\nRahmân ve Rahîm olan Allah’ın adıyla.\nDin gününü yalanlayanı gördün mü?\nİşte o, yetimi itip kakar.\nYoksulu doyurmayı teşvik etmez.\nŞu namaz kılanların vay haline!\nOnlar namazlarından gafildirler.\nOnlar gösteriş yaparlar.\nVe onlar en küçük bir yardımı da engellerler."
+      "metin": "4. Maun Suresi:\n\n بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّح۪يمِ \n\n اَرَاَيْتَ الَّذ۪ي يُكَذِّبُ بِالدّ۪ينِۜ ﴿١﴾ فَذٰلِكَ الَّذ۪ي يَدُعُّ الْيَت۪يمَۙ ﴿٢﴾ وَلَا يَحُضُّ عَلٰى طَعَامِ الْمِسْك۪ينِۜ ﴿٣﴾ فَوَيْلٌ لِلْمُصَلّ۪ينَۙ ﴿٤﴾ اَلَّذ۪ينَ هُمْ عَنْ صَلَاتِهِمْ سَاهُونَۙ ﴿٥﴾ اَلَّذ۪ينَ هُمْ يُرَٓاؤُ۫نَۙ ﴿٦﴾ وَيَمْنَعُونَ الْمَاعُونَ ﴿٧ \n\nOkunuşu:\n\nBismillâhi’r-Rahmâni’r-Rahîm\n\nEraeytellezî yukezzibu bi’d-dîn.\nFezâlike’l-lezî yedu’ul-yetîm.\nVe lâ yehuddu alâ ta’âmi’l-miskîn.\nFeveylun lil-musallîn.\nEllezînehum an salâtihim sâhûn.\nEllezînehum yurâûn.\nVe yemne’ûne’l-mâ’ûn.\n\nAnlamı:\n\nRahmân ve Rahîm olan Allah’ın adıyla.\nDin gününü yalanlayanı gördün mü?\nİşte o, yetimi itip kakar.\nYoksulu doyurmayı teşvik etmez.\nŞu namaz kılanların vay haline!\nOnlar namazlarından gafildirler.\nOnlar gösteriş yaparlar.\nVe onlar en küçük bir yardımı da engellerler."
     },
     {
       "id": "kevser-suresi",
@@ -126,7 +133,7 @@
       "ad": "Kafirun Suresi",
       "tur": "Sure",
       "ses": "Namaz/kisa_sureler/05_Kafirun_Suresi.mp3",
-      "metin": "6. Kafirun Suresi\n\nبِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّح۪يمِ\n\nقُلْ يَٓا اَيُّهَا الْـكَافِرُونَۙ ﴿١﴾ لَٓا اَعْبُدُ مَا تَعْبُدُونَۙ ﴿٢﴾ وَلَٓا اَنْتُمْ عَابِدُونَ مَٓا اَعْبُدُۚ ﴿٣﴾ وَلَٓا اَنَا۬ عَابِدٌ مَا عَبَدْتُمْۙ ﴿٤﴾ وَلَٓا اَنْتُمْ عَابِدُونَ مَٓا اَعْبُدُۜ ﴿٥﴾ لَـكُمْ د۪ينُكُمْ وَلِيَ د۪ينِ ﴿٦ \n\nOkunuşu:\n\nGul yâ eyyuhe’l-kâfirûn.\nLâ a’budu mâ ta’budûn.\nVe lâ entum âbidûne mâ a’bud.\nVelâ ene âbidun mâ abettum.\nVelâ entum âbidûne mâ a’bud.\nLekum dînukum veliye dîn.\n\nAnlamı:\n\nRahmân ve Rahîm olan Allah’ın adıyla.\nDe ki: Ey kâfirler.\nBen sizin taptıklarınıza tapmam.\nSiz de benim ibadet ettiğime ibadet edecek değilsiniz.\nBen de sizin taptıklarınıza tapacak değilim.\nSiz de benim ibadet ettiğime, ibadet edecek değilsiniz.\nSizin dininiz size, benim dinim bana."
+      "metin": "6. Kafirun Suresi\n\nبِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّح۪يمِ\n\nقُلْ يَٓا اَيُّهَا الْـكَافِرُونَۙ ﴿١﴾ لَٓا اَعْبُدُ مَا تَعْبُدُونَۙ ﴿٢﴾ وَلَٓا اَنْتُمْ عَابِدُونَ مَٓا اَعْبُدُۚ ﴿٣﴾ وَلَٓا اَنَا۬ عَابِدٌ مَا عَبَدْتُمْۙ ﴿٤﴾ وَلَٓا اَنْتُمْ عَابِدُونَ مَٓا اَعْبُدُۜ ﴿٥﴾ لَـكُمْ د۪ينُكُمْ وَلِيَ د۪ينِ ﴿٦ \n\nOkunuşu:\n\nBismillâhi’r-Rahmâni’r-Rahîm\n\nGul yâ eyyuhe’l-kâfirûn.\nLâ a’budu mâ ta’budûn.\nVe lâ entum âbidûne mâ a’bud.\nVelâ ene âbidun mâ abettum.\nVelâ entum âbidûne mâ a’bud.\nLekum dînukum veliye dîn.\n\nAnlamı:\n\nRahmân ve Rahîm olan Allah’ın adıyla.\nDe ki: Ey kâfirler.\nBen sizin taptıklarınıza tapmam.\nSiz de benim ibadet ettiğime ibadet edecek değilsiniz.\nBen de sizin taptıklarınıza tapacak değilim.\nSiz de benim ibadet ettiğime, ibadet edecek değilsiniz.\nSizin dininiz size, benim dinim bana."
     },
     {
       "id": "nasr-suresi",
@@ -189,14 +196,14 @@
       "ad": "Kunut Duaları-1",
       "tur": "Dua",
       "ses": "Namaz/kisa_sureler/Kunut_duasi_1.mp3",
-      "metin": "Kunut duaları-1, Yatsı namazından sonra kılınan vitir namazının son rekatında rükudan önce tekbir alınarak yapılan duadır.\n\nAllâhumme innâ nesteînuke (Kunut Duası 1)\n\nاَللَّهُمَّ إِنَّا نَسْتَعِينُكَ وَ نَسْتَغْفِرُكَ وَ نَسْتَهْدِيكَ * وَ نُؤْمِنُ بِكَ وَ نَتُوبُ اِلَيْكَ * وَ نَتَوَكَّلُ عَلَيْكَ * وَ نُثْنِى عَلَيْكَ اْلخَيْرَ كُلَّهُ نَشْكُرُكَ وَ لاَ نَكْفُرُكَ * وَ نَخْلَعُ وَ نَتْرُكُ مَنْ يَفْجُرُكَ *\n\nOkunuşu:\n\nAllâhumme innâ nesteînuke ve nestağfiruke ve nestehdik.\nVe nu'minu bike ve netûbu ileyk.\nVe netevekkelu aleyke\nve nusni aleykel-hayra kullehu neşkuruke\nve lâ nekfuruke\nve nahleu ve netruku men yefcuruk\n\nAnlamı:\n\nAllahım! Senden yardım isteriz, günahlarımızı bağışlamanı isteriz, razı olduğun şeylere hidayet etmeni isteriz. Sana inanırız, sana tevbe ederiz. Sana güveniriz. Bize verdiğin bütün nimetleri bilerek seni hayır ile överiz. Sana şükrederiz. Hiçbir nimetini inkar etmez ve onları başkasından bilmeyiz. Nimetlerini inkar eden ve sana karşı geleni bırakırız."
+      "metin": "Kunut duaları-1, Yatsı namazından sonra kılınan vitir namazının son rekatında rükudan önce tekbir alınarak yapılan duadır.\n\nAllâhumme innâ nesteînuke (Kunut Duası 1)\n\n الله أكبر \n\n اَللَّهُمَّ إِنَّا نَسْتَعِينُكَ وَ نَسْتَغْفِرُكَ وَ نَسْتَهْدِيكَ * وَ نُؤْمِنُ بِكَ وَ نَتُوبُ اِلَيْكَ * وَ نَتَوَكَّلُ عَلَيْكَ * وَ نُثْنِى عَلَيْكَ اْلخَيْرَ كُلَّهُ نَشْكُرُكَ وَ لاَ نَكْفُرُكَ * وَ نَخْلَعُ وَ نَتْرُكُ مَنْ يَفْجُرُكَ *\n\nOkunuşu:\n\n Allah'u ekber \n\nAllâhumme innâ nesteînuke ve nestağfiruke ve nestehdik.\nVe nu'minu bike ve netûbu ileyk.\nVe netevekkelu aleyke\nve nusni aleykel-hayra kullehu neşkuruke\nve lâ nekfuruke\nve nahleu ve netruku men yefcuruk\n\nAnlamı:\n\nAllahım! Senden yardım isteriz, günahlarımızı bağışlamanı isteriz, razı olduğun şeylere hidayet etmeni isteriz. Sana inanırız, sana tevbe ederiz. Sana güveniriz. Bize verdiğin bütün nimetleri bilerek seni hayır ile överiz. Sana şükrederiz. Hiçbir nimetini inkar etmez ve onları başkasından bilmeyiz. Nimetlerini inkar eden ve sana karşı geleni bırakırız."
     },
 	{
       "id": "kunut-dualar2",
       "ad": "Kunut Duaları-2",
       "tur": "Dua",
       "ses": "Namaz/kisa_sureler/Kunut_duasi_2.mp3",
-	"metin": "Kunut duaları-2\n\nAllâhumme iyyâke na'budu (Kunut Duası 2)\n\nاَللّٰهُمَّ اِيَّاكَ نَعْبُدُ وَلَكَ نُصَلّ۪ى وَنَسْجُدُ * وَاِلَيْكَ نَسْعٰى وَنَحْفِدُ * نَرْجُو رَحْمَتَكَ وَنَخْشٰى عَذَابَكَ * اِنَّ عَذَابَكَ بِ الْكُفَّارِ مُلْحِقٌ *\n\nOkunuşu:\n\nAllâhumme iyyâke na'budu ve leke nusalli ve nescudu\nve ileyke nes'a ve nahfidu\nnercû rahmeteke ve nahşâ azâbeke\ninne azâbeke bilkuffâri mulhiıg\n\nAnlamı:\n\nAllahım! Biz yalnız sana kulluk ederiz. Namazı yalnız senin için kılarız, ancak sana secde ederiz. Yalnız sana koşar ve sana yaklaştıracak şeyleri kazanmaya çalışırız. İbadetlerini sevinçle yaparız. Rahmetinin devamını ve çoğalmasını dileriz. Azabından korkarız, şüphesiz senin azabın kafirlere ve inançsızlara ulaşır."
+	"metin": "Kunut duaları-2\n\nAllâhumme iyyâke na'budu (Kunut Duası 2)\n\n الله أكبر \n\n اَللّٰهُمَّ اِيَّاكَ نَعْبُدُ وَلَكَ نُصَلّ۪ى وَنَسْجُدُ * وَاِلَيْكَ نَسْعٰى وَنَحْفِدُ * نَرْجُو رَحْمَتَكَ وَنَخْشٰى عَذَابَكَ * اِنَّ عَذَابَكَ بِ الْكُفَّارِ مُلْحِقٌ *\n\nOkunuşu:\n\n Allah'u ekber \n\nAllâhumme iyyâke na'budu ve leke nusalli ve nescudu\nve ileyke nes'a ve nahfidu\nnercû rahmeteke ve nahşâ azâbeke\ninne azâbeke bilkuffâri mulhiıg\n\nAnlamı:\n\nAllahım! Biz yalnız sana kulluk ederiz. Namazı yalnız senin için kılarız, ancak sana secde ederiz. Yalnız sana koşar ve sana yaklaştıracak şeyleri kazanmaya çalışırız. İbadetlerini sevinçle yaparız. Rahmetinin devamını ve çoğalmasını dileriz. Azabından korkarız, şüphesiz senin azabın kafirlere ve inançsızlara ulaşır."
     }	
   ],
   "resimli": {
