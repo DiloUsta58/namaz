@@ -1,6 +1,9 @@
 const MAIN = document.getElementById("main");
 const searchInput = document.getElementById("searchInput");
 const clearSearch = document.getElementById("clearSearch");
+const navToggle = document.getElementById("navToggle");
+const navBackdrop = document.getElementById("navBackdrop");
+const navEl = document.getElementById("nav");
 
 function h(text) {
   const span = document.createElement("span");
@@ -31,6 +34,33 @@ let pendingResumeActiveAudio = false;
 let lastAllowedHash = location.hash || "#/basla";
 let suppressHashRevert = false;
 let lockedAudio = null;
+let adminMode = false;
+
+function setAdminMode(on) {
+  adminMode = !!on;
+  const root = document.getElementById("app") || document.body;
+  root.classList.toggle("adminMode", adminMode);
+  try {
+    localStorage.setItem("adminMode", adminMode ? "1" : "0");
+  } catch {
+    // ignore
+  }
+}
+
+try {
+  adminMode = localStorage.getItem("adminMode") === "1";
+} catch {
+  adminMode = false;
+}
+setAdminMode(adminMode);
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "F9" && e.ctrlKey) {
+    e.preventDefault();
+    setAdminMode(!adminMode);
+    showToast(adminMode ? "Admin: açık" : "Admin: kapalı");
+  }
+});
 const suppressedAudioSrc = new WeakMap();
 function showToast(message) {
   const root = document.getElementById("app") || document.body;
@@ -111,6 +141,28 @@ function isAudioBlockingNavigation() {
   return !!(activeAudio && !activeAudio.paused && !activeAudio.ended);
 }
 
+function setNavOpen(open) {
+  const root = document.getElementById("app") || document.body;
+  root.classList.toggle("navOpen", !!open);
+  if (navToggle) navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+  if (navBackdrop) navBackdrop.hidden = !open;
+}
+
+if (navToggle) {
+  navToggle.addEventListener("click", () => {
+    const root = document.getElementById("app") || document.body;
+    setNavOpen(!root.classList.contains("navOpen"));
+  });
+}
+if (navBackdrop) navBackdrop.addEventListener("click", () => setNavOpen(false));
+if (navEl) {
+  navEl.addEventListener("click", (e) => {
+    const a = e.target instanceof Element ? e.target.closest("a") : null;
+    if (a) setNavOpen(false);
+  });
+}
+window.addEventListener("hashchange", () => setNavOpen(false));
+
 // Block navigation via menu while audio is playing.
 document.addEventListener(
   "click",
@@ -141,6 +193,23 @@ window.addEventListener("hashchange", () => {
   setTimeout(() => {
     suppressHashRevert = false;
   }, 0);
+});
+
+function scrollPageToTop() {
+  // Ensure headings like "Sureler & Dualar" are visible after navigation on mobile.
+  requestAnimationFrame(() => {
+    try {
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    } catch {
+      window.scrollTo(0, 0);
+    }
+  });
+}
+
+window.addEventListener("hashchange", () => {
+  if (suppressHashRevert) return;
+  if (isAudioBlockingNavigation()) return;
+  scrollPageToTop();
 });
 
 function normalize(text) {
@@ -378,7 +447,8 @@ function applySyncHighlight(detailEl, audioEl, sync) {
   }
   const active = lines[entries[idx].line];
   if (active) active.classList.add("detailLine--active");
-  if (active) {
+  // Don't auto-scroll the whole page just for highlighting; only keep the active line in view while playing.
+  if (active && audioEl && !audioEl.paused && !audioEl.ended) {
     active.scrollIntoView({ block: "nearest" });
   }
 }
@@ -728,20 +798,24 @@ function repeatControls(audioEl) {
   return el("div", { class: "repeat" }, el("span", { class: "repeat__label" }, "Tekrar"), select, counter);
 }
 
-function audioRow(name, src, sub, detailText = "") {
+function audioRow(name, src, sub, detailText = "", domId = "") {
   const a = el("audio", { class: "media", controls: "true", preload: "none", src: toUrl(src) });
   const rep = repeatControls(a);
   const mediaBox = el("div", { class: "item__media" }, el("div", { class: "mediaRow" }, a, rep));
   const detail = detailText ? renderDetailText(detailText) : null;
 
   const syncBtn = detailText
-    ? el("button", { type: "button", class: "btn btn--ghost", onclick: () => openSyncModal({ title: name, audioEl: a, detailText, src }) }, "Senkron")
+    ? el(
+        "button",
+        { type: "button", class: "btn btn--ghost adminOnly", onclick: () => openSyncModal({ title: name, audioEl: a, detailText, src }) },
+        "Senkron",
+      )
     : null;
 
   if (!detailText) {
     return el(
       "div",
-      { class: "item" },
+      { class: "item", id: domId || undefined },
       el("div", { class: "item__left" }, el("div", { class: "item__title" }, name), el("div", { class: "item__sub" }, sub || src)),
       el("div", { style: "min-width: min(420px, 54vw);" }, el("div", { class: "mediaRow" }, a, rep, syncBtn)),
     );
@@ -794,7 +868,7 @@ function audioRow(name, src, sub, detailText = "") {
 
   return el(
     "div",
-    { class: "item item--stack" },
+    { class: "item item--stack", id: domId || undefined },
     el("div", { class: "item__left" }, el("div", { class: "item__title" }, name), el("div", { class: "item__sub" }, sub || src)),
     el("div", { class: "row", style: "justify-content: space-between; width:100%;" }, mediaBox, syncBtn),
     detail,
@@ -982,17 +1056,55 @@ function renderSureler(index, params) {
   const list = index?.surelerVeDualar || [];
   const filtered = q ? list.filter((s) => normalize(s.ad).includes(q) || normalize(s.tur).includes(q)) : list;
 
-  const header = el(
-    "div",
-    {},
-    el("h1", { class: "h1" }, "Sureler & Dualar"),
-    el("p", { class: "p" }, "Dinle → tekrar et → ezberle. Üstteki aramayı da kullanabilirsin."),
-  );
+  const domIdFor = (s) => {
+    const base = (s && (s.id || s.ad)) ? String(s.id || s.ad) : "item";
+    return `sd-${base}`.replace(/[^a-zA-Z0-9_-]/g, "_");
+  };
+
+  const scrollToItem = (id) => {
+    const elx = document.getElementById(id);
+    if (!elx) return;
+    elx.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const buildJump = (title, items) => {
+    const opts = items
+      .slice()
+      .sort((a, b) => String(a.ad).localeCompare(String(b.ad), "tr"))
+      .map((s) => el("option", { value: domIdFor(s) }, s.ad));
+
+    const select = el(
+      "select",
+      {
+        class: "jumpSelect",
+        onchange: (e) => {
+          const id = e.target.value;
+          if (id) scrollToItem(id);
+          e.target.value = "";
+        },
+      },
+      el("option", { value: "" }, title),
+      ...opts,
+    );
+    return select;
+  };
 
   const group = (tur) => filtered.filter((x) => x.tur === tur);
   const ezan = group("Ezan");
   const sureler = group("Sure");
   const dualar = group("Dua");
+
+  const header = el(
+    "div",
+    {},
+    el("h1", { class: "h1" }, "Sureler & Dualar"),
+    el("p", { class: "p" }, "Dinle → tekrar et → ezberle. Üstteki aramayı da kullanabilirsin."),
+    el(
+      "div",
+      { class: "jumpBar", id: "jumpBar" },
+      el("div", { class: "jumpRow" }, buildJump("Dua seç…", dualar), buildJump("Sure seç…", sureler)),
+    ),
+  );
 
   const section = (title, items) =>
     el(
@@ -1000,7 +1112,7 @@ function renderSureler(index, params) {
       {},
       el("div", { class: "sep" }),
       el("div", { class: "row" }, el("h1", { class: "h1", style: "margin:0" }, title), pill(`${items.length} kayıt`, "brand")),
-      el("div", { class: "list" }, items.map((s) => audioRow(s.ad, s.ses, s.tur, s.metin || ""))),
+      el("div", { class: "list" }, items.map((s) => audioRow(s.ad, s.ses, s.tur, s.metin || "", domIdFor(s)))),
     );
 
   return el("div", {}, header, section("Ezan", ezan), section("Dualar", dualar), section("Sureler", sureler), extraDocs(index));
@@ -1238,6 +1350,56 @@ function setupAutoNextAudio() {
   });
 }
 
+function setupJumpBarSticky() {
+  const bar = MAIN.querySelector("#jumpBar");
+  if (!bar) return;
+
+  const mainBox = MAIN.getBoundingClientRect();
+  let baseTop = 0;
+  let raf = 0;
+
+  const getTopOffset = () => {
+    const h = Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--topbar-h")) || 74;
+    return h + 8;
+  };
+
+  const computeBase = () => {
+    const rect = bar.getBoundingClientRect();
+    baseTop = rect.top + window.scrollY - getTopOffset();
+  };
+
+  const apply = () => {
+    raf = 0;
+    const topOffset = getTopOffset();
+    const shouldFix = window.scrollY >= baseTop;
+    bar.classList.toggle("jumpBar--fixed", shouldFix);
+    if (shouldFix) {
+      const mainRect = MAIN.getBoundingClientRect();
+      bar.style.left = `${Math.round(mainRect.left)}px`;
+      bar.style.width = `${Math.round(mainRect.width)}px`;
+      bar.style.top = `${Math.round(topOffset)}px`;
+    } else {
+      bar.style.left = "";
+      bar.style.width = "";
+      bar.style.top = "";
+    }
+  };
+
+  const schedule = () => {
+    if (raf) return;
+    raf = requestAnimationFrame(apply);
+  };
+
+  computeBase();
+  apply();
+
+  window.addEventListener("scroll", schedule, { passive: true });
+  window.addEventListener("resize", () => {
+    computeBase();
+    schedule();
+  });
+}
+
 function setupTopbarHeightVar() {
   const topbar = document.querySelector(".topbar");
   if (!topbar || !("ResizeObserver" in window)) return;
@@ -1272,6 +1434,7 @@ function render() {
     if (typeof params.q === "string") searchInput.value = params.q;
     setMain(renderSureler(CONTENT_INDEX, params));
     setupAutoNextAudio();
+    setupJumpBarSticky();
   } else if (path === "/resimli") {
     setMain(renderResimli(CONTENT_INDEX));
   } else if (path === "/medya") {

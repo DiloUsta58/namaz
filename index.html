@@ -22,20 +22,26 @@
           </div>
         </div>
 
-        <div class="search">
-          <input
-            id="searchInput"
-            class="search__input"
-            type="search"
-            placeholder="Ara: Sabah, Ayetel Kürsi, İhlâs..."
-            autocomplete="off"
-          />
-          <button id="clearSearch" class="btn btn--ghost" type="button">Temizle</button>
-        </div>
+        <button id="navToggle" class="btn btn--ghost navToggle" type="button" aria-controls="nav" aria-expanded="false">
+          Menü
+        </button>
       </header>
 
       <div class="layout">
-        <nav class="nav" aria-label="Gezinti">
+        <div id="navBackdrop" class="navBackdrop" hidden></div>
+        <nav id="nav" class="nav" aria-label="Gezinti">
+          <div class="navSearch">
+            <div class="search">
+              <input
+                id="searchInput"
+                class="search__input"
+                type="search"
+                placeholder="Ara: Sabah, Ayetel Kürsi, İhlâs..."
+                autocomplete="off"
+              />
+              <button id="clearSearch" class="btn btn--ghost" type="button">Temizle</button>
+            </div>
+          </div>
           <a class="nav__item" href="#/basla" data-route="/basla">Başla</a>
           <a class="nav__item" href="#/namazlar" data-route="/namazlar">Namazlar</a>
           <a class="nav__item" href="#/sureler" data-route="/sureler">Sureler & Dualar</a>

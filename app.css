@@ -93,7 +93,8 @@ code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Libera
 .brand__title{font-weight:500; letter-spacing:.2px; font-size: clamp(14px, 0.55vw + 12px, 16px)}
 .brand__subtitle{font-size:var(--fs-sm); color:var(--muted)}
 
-.search{display:flex; gap:10px; align-items:center; flex: 1 1 420px; min-width:0}
+.navSearch{padding: 6px 6px 10px}
+.search{display:flex; gap:10px; align-items:center; flex: 1 1 auto; min-width:0}
 .search__input{
   width:100%;
   padding:11px 12px;
@@ -114,6 +115,14 @@ code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Libera
   border-radius:var(--radius2);
   padding:10px;
   box-shadow: var(--shadow);
+}
+.nav .search{width:100%}
+.navToggle{display:none}
+.navBackdrop{
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,.55);
+  z-index: 40;
 }
 .nav__item{
   display:flex; align-items:center; justify-content:space-between;
@@ -300,7 +309,43 @@ code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Libera
 }
 .btn--ghost{background:transparent}
 
+.adminOnly{display:none !important}
+.adminMode .adminOnly{display:inline-flex !important}
+
 .row{display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+.jumpBar{
+  position: sticky;
+  top: calc(var(--topbar-h, 74px) + 8px);
+  z-index: 8;
+  padding: 10px 0 8px;
+  margin: 0 0 8px;
+  background: rgba(11,18,32,.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: saturate(120%) blur(10px);
+}
+.jumpBar--fixed{
+  position: fixed;
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.jumpRow{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin: 6px 0 10px}
+.jumpSelect{
+  width: 100%;
+  min-width: min(360px, 100%);
+  background:rgba(11,18,32,.72);
+  border:1px solid rgba(255,255,255,.14);
+  color:var(--text);
+  border-radius:14px;
+  padding:10px 12px;
+  font-size:var(--fs-base);
+  outline:none;
+}
+.jumpSelect:focus{border-color:rgba(121,192,255,.45); box-shadow:0 0 0 4px rgba(121,192,255,.10)}
+.jumpSelect option{background: var(--panel); color: var(--text);}
 .sep{height:1px; background:var(--border); margin:14px 0}
 
 .list{display:flex; flex-direction:column; gap:10px}
@@ -412,16 +457,31 @@ code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Libera
 
 @media (max-width: 940px){
   .layout{grid-template-columns: 1fr; padding:12px}
+  .navToggle{display:inline-flex}
+  .navBackdrop[hidden]{display:none}
   .nav{
-    position:sticky;
+    position:fixed;
+    left:12px;
+    right:12px;
     top: calc(var(--topbar-h, 74px) + 10px);
-    z-index: 9;
+    z-index: 50;
     display:flex;
+    flex-direction:column;
     gap:8px;
+    max-height: min(70vh, 520px);
     overflow:auto;
-    white-space:nowrap
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .18s ease, transform .18s ease;
   }
-  .nav__item{min-width:max-content}
+  .nav__item{min-width:unset}
+  .navOpen .nav{
+    opacity:1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .navOpen .navBackdrop{display:block}
   .search{min-width: 0; flex:1}
   .topbar{flex-wrap:wrap}
   .card{grid-column: span 12; flex-direction:column}
@@ -458,6 +518,8 @@ code{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Libera
   .item > div{width:100%}
   .mediaRow{flex-direction:column; align-items:stretch}
   .repeat{justify-content:space-between}
+  .jumpRow{display:grid; grid-template-columns: 1fr 1fr; width:100%}
+  .jumpSelect{min-width:0; width:100%}
 }
 
 @media (min-width: 1200px){
