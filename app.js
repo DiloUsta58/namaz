@@ -306,6 +306,26 @@ function loadSyncCached(src) {
   return null;
 }
 
+function ensureSyncLoaded(src) {
+  // Triggers loading sync from /senkron/*.json when not in localStorage, and returns a promise.
+  const fromLocal = loadSync(src);
+  if (fromLocal) {
+    syncCache.set(src, fromLocal);
+    return Promise.resolve(fromLocal);
+  }
+  if (syncCache.has(src)) return Promise.resolve(syncCache.get(src));
+  if (!syncFetchCache.has(src)) {
+    syncFetchCache.set(
+      src,
+      fetchSyncFromFile(src).then((obj) => {
+        syncCache.set(src, obj);
+        return obj;
+      }),
+    );
+  }
+  return syncFetchCache.get(src);
+}
+
 function saveSync(src, sync) {
   localStorage.setItem(syncKeyFor(src), JSON.stringify(sync));
 }
@@ -366,7 +386,7 @@ function applySyncHighlight(detailEl, audioEl, sync) {
 function openSyncModal({ title, audioEl, detailText, src }) {
   const lines = String(detailText || "").split(/\r?\n/);
   const isEmptyLine = (s) => String(s || "").trim() === "";
-  const existing = loadSync(src);
+  const existing = loadSync(src) || syncCache.get(src);
   const sync = existing || { version: 2, src, marks: {} };
   if (!sync.marks || typeof sync.marks !== "object") sync.marks = {};
   let cursor = 0;
@@ -734,6 +754,11 @@ function audioRow(name, src, sub, detailText = "") {
     };
     a.addEventListener("timeupdate", apply);
     a.addEventListener("play", apply);
+
+    // Auto-load sync from /senkron/*.json and apply once it arrives.
+    ensureSyncLoaded(src).then((sync) => {
+      if (sync) applySyncHighlight(detail, a, sync);
+    });
 
     // Click-to-seek on lines (works even when audio is paused).
     detail.addEventListener("click", (e) => {
